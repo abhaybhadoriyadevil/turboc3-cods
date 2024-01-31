@@ -1,0 +1,113 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<graphics.h>
+#include<stdlib.h>
+#include<dos.h>
+
+
+   void icon(){ int a=getmaxx(),b=240;
+   for(a=getmaxx()-150;a>150;a--){ setcolor(a);
+     ellipse(a,b,110,70,150, 50);
+     ellipse(a,b,110,70,70, 25);
+     ellipse(a,b,251,250,50,140);delay(5); cleardevice();}
+	  setcolor(RED);
+     ellipse(150,240,110,70,150, 50);
+     ellipse(150,240,110,70,70, 25);
+     ellipse(150,240,251,250,50,140);
+     settextstyle(TRIPLEX_FONT, HORIZ_DIR, 5);
+     outtextxy(250,220,"LUCIFER GAMING"); delay(1000);
+    };
+
+main(){ int gb=DETECT,gm,x,y,button,a,b,k,d,c=100;
+initgraph(&gb,&gm,"C://turboc3//bgi");
+icon();cleardevice();
+union REGS in,out;
+in.x.ax=1;
+int86(0x33,&in,&out);
+ settextstyle(TRIPLEX_FONT, HORIZ_DIR, 5); setcolor(RED);
+ outtextxy(10,185,"####### welcome #######");
+ delay(2000); cleardevice();
+  ram:
+   setcolor(WHITE);
+ outtextxy(getmaxx()/2-200,getmaxy()/2," LETS SAVE THE EARTH ");
+ delay(2000);
+   cleardevice(); setcolor(BLUE);
+    settextstyle(TRIPLEX_FONT, HORIZ_DIR, 4);  setcolor(YELLOW);
+  outtextxy(5,100," SELECT MODE ");
+  {
+   rectangle(150,250,200,200);outtextxy(140,255,"EASY");
+   rectangle(275,250,325,200);outtextxy(235,255,"NORMAL");
+   rectangle(450,250,500,200);outtextxy(415,255,"DIFFICULT");
+while(!kbhit()){
+   in.x.ax=3;
+ int86(0x33,&in,&out);
+ button=out.x.bx;
+ if(button==1){button=0;
+  x=out.x.cx;
+  y=out.x.dx;
+ if(x>150&&x<200&&y<250&&y>200){d=70;cleardevice();goto game;}
+ if(x>250&&x<300&&y<250&&y>200){d=50;cleardevice();goto game;}
+ if(x>450&&x<500&&y<250&&y>200){d=30;cleardevice();goto game;}
+
+}    } }  game:
+  cleardevice();  in.x.ax=3;
+
+
+while(!kbhit()){
+ cleardevice();setcolor(random(15));
+a=random(getmaxx()-d);b=random(getmaxy()-d); c--;
+    cleardevice();
+
+    //alien
+rectangle(a,b+d,a+d,b);
+circle(a+(d/4),(b+d/4),d/8);  circle((a+d)-(d/4),(b+d/4),d/8);
+rectangle(a+(d/4),(b+d/4)+(d/2),(a+d)-(d/4),(b+(d/2)-d/18));
+	   delay(500);
+
+int86(0x33,&in,&out);  cleardevice();
+button=out.x.bx;	  y=out.x.dx;x=out.x.cx;
+
+ if(button==1)
+ { button=0;
+
+  if(x>=a&&x<=a+d&&y>=b&&y<=b+d){
+    outtextxy(getmaxx()/2,getmaxy()/2," YOU WIN THE GAME ");
+      cout<<"YOUR SCORE IS  :"<<endl<<c;
+    delay(1000);cleardevice();
+    while(!kbhit()){ settextstyle(TRIPLEX_FONT, HORIZ_DIR, 1);
+outtextxy(getmaxx()/2-200,150," DO YOU WANT TO CONTINUE ...... ");
+
+  rectangle(300,250,350,200);outtextxy(315,225,"YES");
+   rectangle(350,250,400,200);outtextxy(375,225,"NO");
+     in.x.ax=3;
+ int86(0x33,&in,&out);
+ button=out.x.bx;
+ if(button==1){button=0;
+  x=out.x.cx;
+  y=out.x.dx;
+ if(x>300&&x<350&&y<250&&y>200){ cleardevice(); goto ram;  }
+
+ if(x>350&&x<400&&y<250&&y>200){ cleardevice(); goto abhay;  }
+
+	     }   } }
+
+
+
+
+}    if(c==0)
+  {   outtextxy(getmaxx()/2-200,getmaxy()/2," YOU ARE DEFEATED  ");
+  delay(2000);
+  cleardevice();goto abhay; }
+
+
+
+	   }
+getch();abhay: }
+
+
+
+
+
+
+
